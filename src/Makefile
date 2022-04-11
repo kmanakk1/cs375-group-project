@@ -9,6 +9,7 @@ all: ${SRC}
 
 tests: all
 	$(JVM) Sudoku ../puzzles/demo.txt
+	$(JVM) Sudoku ../puzzles/hard0.txt
 
 clean:
 	rm *.class Sudoku.jar

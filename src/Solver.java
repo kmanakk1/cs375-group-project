@@ -7,7 +7,7 @@ public class Solver {
     int grid[][];                   // our 2d matrix "sudoku board"
 
     Solver() {
-        //grid = new int[gridSize][gridSize];
+        grid = new int[gridSize][gridSize];
     }
 
     // read in puzzle
@@ -18,9 +18,9 @@ public class Solver {
             Scanner puzzleReader = new Scanner(puzzleFile);
 
             // get grid size for problem
-            String gridSizeStr = puzzleReader.nextLine();
+            /*String gridSizeStr = puzzleReader.nextLine();
             gridSize = Integer.parseInt(gridSizeStr);
-            grid = new int[gridSize][gridSize]; 
+            grid = new int[gridSize][gridSize]; */
 
             // read in grid[][]
             while(puzzleReader.hasNextLine()) {
