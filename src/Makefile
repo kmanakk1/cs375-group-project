@@ -1,7 +1,7 @@
 JDK = javac
 JVM = java
 JAR = jar
-SRC = Sudoku.java BacktrackSolver.java
+SRC = Sudoku.java Solver.java
 
 all: ${SRC}
 	$(JDK) ${SRC}

@@ -1,7 +1,7 @@
 public class Sudoku {
 
     public static void main(String[] args) {
-        BacktrackSolver sudoku = new BacktrackSolver();
+        Solver sudoku = new Solver();
         if(args.length < 1) {
             System.out.println("Usage: solver <puzzle file>");
             System.exit(1);
@@ -10,6 +10,7 @@ public class Sudoku {
         // load input
         sudoku.loadPuzzle(args[0]);
 
+        sudoku.naiveSolver(0, 0);
         // TODO: call solver here
         // print output
         sudoku.printGrid();
