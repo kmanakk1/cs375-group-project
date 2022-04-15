@@ -1,16 +1,16 @@
 JDK = javac
 JVM = java
 JAR = jar
-SRC = Sudoku.java Solver.java
+SRC = *.java
 
 all: ${SRC}
-	$(JDK) ${SRC}
-	$(JAR) cfe Sudoku.jar Sudoku *.class
+	$(JDK) -d classes ${SRC}
+	$(JAR) cfe Program.jar Program *.class
 
 tests: all
-	$(JVM) Sudoku ../puzzles/demo.txt 1
-	$(JVM) Sudoku ../puzzles/hard0.txt 1
-	$(JVM) Sudoku ../puzzles/empty.txt 1
+	$(JVM) -cp classes Program ../puzzles/demo.txt 1
+	$(JVM) -cp classes Program ../puzzles/hard0.txt 1
+	$(JVM) -cp classes Program ../puzzles/empty.txt 1
 
 clean:
-	rm *.class Sudoku.jar
+	rm *.class Program.jar

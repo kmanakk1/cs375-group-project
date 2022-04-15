@@ -1,36 +1,47 @@
-public class Sudoku {
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
-    public static void main(String[] args) {
-        Solver sudoku = new Solver();
-        boolean solved = false;
-        if(args.length < 2) {
-            System.out.println("Usage: solver <puzzle file> <mode>");
+public class Sudoku {
+    int boardSize = 9;               // default sudoku size: 9
+    int board[][];                   // our 2d matrix "sudoku board"
+
+    Sudoku() {
+        board = new int[boardSize][boardSize];
+    }
+
+    void loadPuzzle(String filename) {
+        int currentRow=0;
+        try {
+            File puzzleFile = new File(filename);
+            Scanner puzzleReader = new Scanner(puzzleFile);
+
+            // get board size for problem
+            /*String boardSizeStr = puzzleReader.nextLine();
+            boardSize = Integer.parseInt(boardSizeStr);
+            board = new int[boardSize][boardSize]; */
+
+            // read in board[][]
+            while(puzzleReader.hasNextLine()) {
+                String data = puzzleReader.nextLine();
+                String[] tokenizedRow = data.split(" ");
+                for(int j=0; j<boardSize; j++) {
+                    board[currentRow][j] = Integer.parseInt(tokenizedRow[j]);
+                }
+                currentRow++;
+            }
+            puzzleReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Error reading puzzle file '" + filename + "'");
             System.exit(1);
         }
+    }
 
-        // load input
-        sudoku.loadPuzzle(args[0]);
-
-        long start = System.currentTimeMillis();
-
-        switch(args[1]) {
-            case "0":
-                solved = sudoku.naiveSolver(0, 0);
-                break;
-            case "1":
-                solved = sudoku.backtrackSolver();
-                break;
-            default:
-                System.out.println("valid modes: 0, 1");
-        }
-        long end = System.currentTimeMillis();
-
-        float timeTaken = (end-start)/1000f;
-
-        // print output
-        System.out.println("==========================");
-        System.out.format("Algo: %s; Time: %05f\n", args[1], timeTaken);
-        System.out.println("Solution: ================");
-        if(solved) sudoku.printBoard();
+    boolean usedInBox(int startRow, int startCol, int number) {
+        for (int row = 0; row < 3; row++)
+            for (int col = 0; col < 3; col++)
+                if (board[row + startRow][col + startCol] == number)
+                    return true;
+        return false;
     }
 }
