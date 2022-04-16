@@ -39,7 +39,7 @@ public class Solver {
             return naiveSolver(row, col+1);
         
         for(int number = 1; number <= board.boardSize; number++) {
-            if(PromisingFunctions.isLegal(board, row, col, number)) {
+            if(PromisingFunctions.isPromising(board,row, col, number)) {
                 // use number in current row
                 board.board[row][col] = number;
 
@@ -84,7 +84,7 @@ public class Solver {
             return true;
         
         for(int number=1; number<=9; number++) {
-            if(PromisingFunctions.isLegal(board, row, col, number)) {
+            if(PromisingFunctions.isPromising(board, row, col, number)) {
                 board.board[row][col] = number;
 
                 // recursive call

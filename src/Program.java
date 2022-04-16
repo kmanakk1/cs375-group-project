@@ -11,6 +11,9 @@ public class Program {
         // load input
         solver.loadPuzzle(args[0]);
 
+        // choose a promising function to use
+        PromisingFunctions.state = 1;
+
         long start = System.currentTimeMillis();
 
         switch(args[1]) {
