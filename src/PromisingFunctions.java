@@ -5,7 +5,7 @@ public class PromisingFunctions {
 
     public static boolean isPromising(Sudoku board, int row, int col, int number) {
         switch (state) {
-            case 1: return isLegal(board, row, col, number);
+            case 1: return naivePF(board, row, col, number);
             // ...
             default: throw new IllegalStateException("Invalid state " + state);
         }
@@ -14,7 +14,9 @@ public class PromisingFunctions {
     // Or maybe find a way to store a function pointer and at the start of the program choose a 
     // function we wanna use. Hence use that variable only.
 
-    private static boolean isLegal(Sudoku board, int row, int col, int number) {
+    // basic promising function, check entire row, column, and neighboring
+    // 3x3 box for number.  if we don't encounter it, then it is promising.
+    private static boolean naivePF(Sudoku board, int row, int col, int number) {
         // check row
         for(int i=0; i<board.boardSize; i++)
             if(board.board[row][i] == number)

@@ -13,4 +13,4 @@ tests: all
 	$(JVM) -cp classes Program ../puzzles/empty.txt 1
 
 clean:
-	rm *.class Program.jar
+	rm classes/*.class Program.jar
