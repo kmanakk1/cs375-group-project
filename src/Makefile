@@ -5,7 +5,7 @@ SRC = *.java
 
 all: ${SRC}
 	$(JDK) -d classes ${SRC}
-	$(JAR) cfe Program.jar Program classes/*.class
+	cd classes;$(JAR) cfe ../Program.jar Program *.class
 
 tests: all
 	$(JVM) -cp classes Program ../puzzles/hard0.txt 1
