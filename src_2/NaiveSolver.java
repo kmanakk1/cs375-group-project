@@ -22,7 +22,7 @@ public class NaiveSolver implements ISolver {
             return naiveSolver(row, col+1);
         
         for(int number = 1; number <= Sudoku.boardSize; number++) {
-            if(isPromising(board,row, col, number)) {
+            if(isLegal(board,row, col, number)) {
                 // use number in current row
                 board.board[row][col] = number;
 
@@ -39,7 +39,7 @@ public class NaiveSolver implements ISolver {
         return false;
     }
 
-    private static boolean isPromising(Sudoku board, int row, int col, int number) {
+    private static boolean isLegal(Sudoku board, int row, int col, int number) {
         // check row
         for(int i=0; i<Sudoku.boardSize; i++)
             if(board.board[row][i] == number)
