@@ -5,7 +5,7 @@ public class PromisingFunctions {
 
     public static boolean isPromising(Sudoku board, int row, int col, int number) {
         switch (state) {
-            case 1: return naivePF(board, row, col, number);
+            case 1: return isLegalLoops(board, row, col, number);
             // ...
             default: throw new IllegalStateException("Invalid state " + state);
         }
@@ -16,14 +16,14 @@ public class PromisingFunctions {
 
     // basic promising function, check entire row, column, and neighboring
     // 3x3 box for number.  if we don't encounter it, then it is promising.
-    private static boolean naivePF(Sudoku board, int row, int col, int number) {
+    private static boolean isLegalLoops(Sudoku board, int row, int col, int number) {
         // check row
-        for(int i=0; i<board.boardSize; i++)
+        for(int i=0; i<Sudoku.boardSize; i++)
             if(board.board[row][i] == number)
                 return false;
     
         // check col
-        for(int i=0; i<board.boardSize; i++)
+        for(int i=0; i<Sudoku.boardSize; i++)
             if(board.board[i][col] == number)
                 return false;
 
@@ -35,4 +35,13 @@ public class PromisingFunctions {
         return true;
     }
     
+    int[] rows = new int[Sudoku.boardSize];
+    int[] cols = new int[Sudoku.boardSize];
+    int[] boxes = new int[Sudoku.boardSize];
+    boolean isSet = false;
+
+    static int getBox(int i, int j) {
+        return i / 3 * 3 + j / 3;
+    }
+
 }

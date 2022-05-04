@@ -1,7 +1,3 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-
 public class Solver {
     Sudoku board;
 
@@ -15,8 +11,8 @@ public class Solver {
     }
 
     void printBoard() {
-        for(int i=0; i<board.boardSize; i++) {
-            for(int j=0; j<board.boardSize; j++) {
+        for(int i=0; i<Sudoku.boardSize; i++) {
+            for(int j=0; j<Sudoku.boardSize; j++) {
                 System.out.print(board.board[i][j] + " ");
             }
             System.out.println();
@@ -25,11 +21,11 @@ public class Solver {
 
     boolean naiveSolver(int row, int col) {
         // check if we have reached the end
-        if((row == board.boardSize-1) && (col == board.boardSize))
+        if((row == Sudoku.boardSize-1) && (col == Sudoku.boardSize))
             return true;
         
         // if we reach end of a col, move to next row
-        if(col == board.boardSize) {
+        if(col == Sudoku.boardSize) {
             row++;
             col = 0;
         }
@@ -38,7 +34,7 @@ public class Solver {
         if(board.board[row][col] > 0)
             return naiveSolver(row, col+1);
         
-        for(int number = 1; number <= board.boardSize; number++) {
+        for(int number = 1; number <= Sudoku.boardSize; number++) {
             if(PromisingFunctions.isPromising(board,row, col, number)) {
                 // use number in current row
                 board.board[row][col] = number;
@@ -68,8 +64,8 @@ public class Solver {
         int row = 0, col = 0;
         boolean done = true;
         // check if we have reached the end
-        for(int i = 0; i < board.boardSize; i++) {
-            for(int j = 0; j < board.boardSize; j++) {
+        for(int i = 0; i < Sudoku.boardSize; i++) {
+            for(int j = 0; j < Sudoku.boardSize; j++) {
                 if(board.board[i][j] == 0) {
                     row=i; col=j;
                     done = false;

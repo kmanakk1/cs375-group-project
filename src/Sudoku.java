@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Sudoku {
-    int boardSize = 9;               // default sudoku size: 9
+    static int boardSize = 9;               // default sudoku size: 9
     int board[][];                   // our 2d matrix "sudoku board"
 
     Sudoku() {
