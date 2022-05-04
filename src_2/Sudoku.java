@@ -31,11 +31,16 @@ public class Sudoku {
     }
 
     void printBoard() {
-        for (int[] row : board) {
-            for (int number : row) {
-                System.out.print(number + " ");
+        for (int i = 0; i < boardSize; i++) {
+            int[] row = board[i];
+            System.out.print("|");
+            for (int j = 0; j < boardSize; j++) {
+                System.out.print(row[j]);
+                if ((j + 1) % 3 == 0) System.out.print("|");
+                else System.out.print(" ");
             }
-            System.out.println();
+            if ((i + 1) % 3 == 0) System.out.println("\n------------------");
+            else System.out.println();
         }
     }
 
