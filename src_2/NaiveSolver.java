@@ -3,23 +3,27 @@ public class NaiveSolver implements ISolver {
 
     public boolean solve(Sudoku s) {
         this.board = s;
-        return naiveSolver(0, 0);
+        return naiveSolver();
     }
 
-    boolean naiveSolver(int row, int col) {
+    boolean naiveSolver() {
+        int row = 0, col = 0;
+        boolean done = true;
         // check if we have reached the end
-        if((row == Sudoku.boardSize-1) && (col == Sudoku.boardSize))
-            return true;
-        
-        // if we reach end of a col, move to next row
-        if(col == Sudoku.boardSize) {
-            row++;
-            col = 0;
+        for(int i = 0; i < Sudoku.boardSize; i++) {
+            for(int j = 0; j < Sudoku.boardSize; j++) {
+                if(board.board[i][j] == 0) {
+                    row=i; col=j;
+                    done = false;
+                    break;
+                }
+            }
+            if(!done)
+                break;
         }
 
-        // current pos already has an item
-        if(board.board[row][col] > 0)
-            return naiveSolver(row, col+1);
+        if(done)
+            return true;
         
         for(int number = 1; number <= Sudoku.boardSize; number++) {
             if(isLegal(board,row, col, number)) {
@@ -27,7 +31,7 @@ public class NaiveSolver implements ISolver {
                 board.board[row][col] = number;
 
                 // continue solving
-                if(naiveSolver(row, col+1))
+                if(naiveSolver())
                     return true;
             }
 
