@@ -4,34 +4,30 @@ public class BTLoopsSolver implements ISolver {
 
     public boolean solve(Sudoku s) {
         this.board = s;
-        return backtrackSolver();
+        return backtrackSolver(0,0);
     }
     
-    boolean backtrackSolver() {
-        int row = 0, col = 0;
-        boolean done = true;
-        // check if we have reached the end
-        for(int i = 0; i < Sudoku.boardSize; i++) {
-            for(int j = 0; j < Sudoku.boardSize; j++) {
-                if(board.board[i][j] == 0) {
-                    row=i; col=j;
-                    done = false;
-                    break;
-                }
-            }
-            if(!done)
-                break;
+    boolean backtrackSolver(int row, int col) {
+        
+        // check if we have reached the end of a row
+        if (col == Sudoku.boardSize) {
+            col = 0;
+            row++;
+            if(row == Sudoku.boardSize)
+                return true;
         }
 
-        if(done)
-            return true;
+        // skip filled spots
+        if (board.board[row][col] != 0)
+            return backtrackSolver(row, col + 1);
         
+        // main logic
         for(int number=1; number<=9; number++) {
             if(isPromising(board, row, col, number)) {
                 board.board[row][col] = number;
 
                 // recursive call
-                if(backtrackSolver())
+                if(backtrackSolver(row, col+1))
                     return true;
                 
                 board.board[row][col] = 0;
