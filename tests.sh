@@ -11,4 +11,4 @@ testSudoku() {
     done
 }
 
-for i in $PUZZLES ; do testSudoku puzzles/$i ; done
+for i in $PUZZLES ; do testSudoku puzzles/$i ; echo; done
