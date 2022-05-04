@@ -1,1 +1,1 @@
-javac -d classes src_2/*.java
+javac -d classes src/*.java

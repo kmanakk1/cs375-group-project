@@ -1,44 +1,56 @@
 public class Program {
-
+    
     public static void main(String[] args) {
-        Solver solver = new Solver();
-        boolean solved = false;
-        if(args.length < 2) {
-            System.out.println("Usage: solver <puzzle file> <mode>");
-            System.exit(1);
+        boolean print = true;
+
+        if (args.length < 2) {
+            System.err.println("[USAGE]: ./run.sh <sudoku file> <0|1|2> [noprint]");
+            System.exit(-1);
         }
 
-        // load input
-        solver.loadPuzzle(args[0]);
+        Program program = new Program();
+        Sudoku s = new Sudoku();
+        s.readSudokyFromFile(args[0]);
 
-        // choose a promising function to use
-        PromisingFunctions.state = 1;
-
-        long start = System.currentTimeMillis();
-
-        switch(args[1]) {
-            case "0":
-                solved = solver.naiveSolver(0, 0);
-                break;
-            case "1":
-                solved = solver.backtrackSolver();
-                break;
-            default:
-                System.out.println("valid modes: 0, 1");
+        int choice = -1;
+        try {
+            choice = Integer.parseInt(args[1]); 
+        } catch (Exception e) {
+            System.err.println("[USAGE]: ./run.sh <sudoku file> <0|1|2> [noprint]");
+            System.exit(-1);
         }
+        ISolver solver;
+        switch (choice) {
+            case 0: solver = new NaiveSolver();
+            break;
+            case 1: solver = new BTLoopsSolver();
+            break;
+            case 2: solver = new BTBitMasksSolver();
+            break;
+            default: throw new IllegalArgumentException("Invalid solver.");
+        }
+        
+        if(args.length >= 3)
+            if(args[2].equals("noprint"))
+                print = false;
 
-        long end = System.currentTimeMillis();
+        if(print) {
+            s.printBoard();
+            System.out.println("-----------------");
 
-        float timeTaken = (end-start)/1000f;
+            System.out.println("Took time: " + (program.timeSolver(solver, s)/1000000000.0));
+            System.out.println("-----------------");
 
-        // print output
-        if(solved) {
-            System.out.println("==================================");
-            System.out.format("Algo: %s; Time: %08f\n", args[1], timeTaken);
-            System.out.println("=========== Solution: ============");
-            solver.printBoard();
+            s.printBoard();
         } else {
-            System.out.println("Unable to solve puzzle\n");
+            System.out.println("solving " + args[0] + " using mode " + args[1] + " took time: " + (program.timeSolver(solver, s)/1000000000.0));
         }
+        
+    }
+
+    public long timeSolver(ISolver solver, Sudoku s) {
+        long start = System.nanoTime();
+        solver.solve(s);
+        return System.nanoTime() - start;
     }
 }

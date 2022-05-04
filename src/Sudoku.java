@@ -1,39 +1,46 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Sudoku {
-    static int boardSize = 9;               // default sudoku size: 9
-    int board[][];                   // our 2d matrix "sudoku board"
+    
+    static int boardSize = 9;
+    
+    int board[][];
 
     Sudoku() {
         board = new int[boardSize][boardSize];
     }
 
-    void loadPuzzle(String filename) {
-        int currentRow=0;
+    void readSudokyFromFile(String fileName) {
+        List<String> lines = new ArrayList<>();
         try {
-            File puzzleFile = new File(filename);
-            Scanner puzzleReader = new Scanner(puzzleFile);
+            lines = Files.readAllLines(Paths.get(fileName));
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(-1);
+        }
 
-            // get board size for problem
-            /*String boardSizeStr = puzzleReader.nextLine();
-            boardSize = Integer.parseInt(boardSizeStr);
-            board = new int[boardSize][boardSize]; */
-
-            // read in board[][]
-            while(puzzleReader.hasNextLine()) {
-                String data = puzzleReader.nextLine();
-                String[] tokenizedRow = data.split(" ");
-                for(int j=0; j<boardSize; j++) {
-                    board[currentRow][j] = Integer.parseInt(tokenizedRow[j]);
-                }
-                currentRow++;
+        for (int i = 0; i < boardSize; i++) {
+            String[] numbers = lines.get(i).split(" ");
+            for (int j = 0; j < boardSize; j++) {
+                board[i][j] = Integer.parseInt(numbers[j]);
             }
-            puzzleReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Error reading puzzle file '" + filename + "'");
-            System.exit(1);
+        }
+    }
+
+    void printBoard() {
+        for (int i = 0; i < boardSize; i++) {
+            int[] row = board[i];
+            System.out.print("|");
+            for (int j = 0; j < boardSize; j++) {
+                System.out.print(row[j]);
+                if ((j + 1) % 3 == 0) System.out.print("|");
+                else System.out.print(" ");
+            }
+            if ((i + 1) % 3 == 0) System.out.println("\n------------------");
+            else System.out.println();
         }
     }
 
