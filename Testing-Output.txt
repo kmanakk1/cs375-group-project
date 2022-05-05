@@ -1,0 +1,44 @@
+solving puzzles/easy1.txt using mode 0 took time: 1.50084E-4
+solving puzzles/easy1.txt using mode 1 took time: 1.05215E-4
+solving puzzles/easy1.txt using mode 2 took time: 5.7631E-5
+
+solving puzzles/easy2.txt using mode 0 took time: 8.10472E-4
+solving puzzles/easy2.txt using mode 1 took time: 6.17455E-4
+solving puzzles/easy2.txt using mode 2 took time: 3.88366E-4
+
+solving puzzles/easy3.txt using mode 0 took time: 9.23588E-4
+solving puzzles/easy3.txt using mode 1 took time: 8.42602E-4
+solving puzzles/easy3.txt using mode 2 took time: 5.77008E-4
+
+solving puzzles/empty.txt using mode 0 took time: 7.81307E-4
+solving puzzles/empty.txt using mode 1 took time: 6.10573E-4
+solving puzzles/empty.txt using mode 2 took time: 5.21196E-4
+
+solving puzzles/evil1.txt using mode 0 took time: 0.042641172
+solving puzzles/evil1.txt using mode 1 took time: 0.024461691
+solving puzzles/evil1.txt using mode 2 took time: 0.008856464
+
+solving puzzles/evil2.txt using mode 0 took time: 0.051285935
+solving puzzles/evil2.txt using mode 1 took time: 0.021619514
+solving puzzles/evil2.txt using mode 2 took time: 0.011847316
+
+solving puzzles/evil3.txt using mode 0 took time: 0.081316041
+solving puzzles/evil3.txt using mode 1 took time: 0.064196583
+solving puzzles/evil3.txt using mode 2 took time: 0.031895492
+
+solving puzzles/hard1.txt using mode 0 took time: 0.045536765
+solving puzzles/hard1.txt using mode 1 took time: 0.024735177
+solving puzzles/hard1.txt using mode 2 took time: 0.015789671
+
+solving puzzles/hard2.txt using mode 0 took time: 0.01387208
+solving puzzles/hard2.txt using mode 1 took time: 0.010637072
+solving puzzles/hard2.txt using mode 2 took time: 0.003901126
+
+solving puzzles/hard3.txt using mode 0 took time: 0.009298971
+solving puzzles/hard3.txt using mode 1 took time: 0.007607629
+solving puzzles/hard3.txt using mode 2 took time: 0.004356917
+
+solving puzzles/impossible.txt using mode 0 took time: 2.06925E-4
+solving puzzles/impossible.txt using mode 1 took time: 1.9851E-4
+solving puzzles/impossible.txt using mode 2 took time: 9.7472E-5
+
